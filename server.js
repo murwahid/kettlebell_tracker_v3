@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-//require('dotenv').config();
+require('dotenv').config();
 //STEP 2: USE THE MODULE. 
 const app = express();
 //STEP 3: CREATE THE DESIGNATED PORT 
