@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.51432d23.css",
+    "main.js": "/static/js/main.026c8c72.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/noun-kettlebell-253683.png": "/static/media/noun-kettlebell-253683.1dadd2eafcb345bd2549.png",
+    "index.html": "/index.html",
+    "main.51432d23.css.map": "/static/css/main.51432d23.css.map",
+    "main.026c8c72.js.map": "/static/js/main.026c8c72.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.51432d23.css",
+    "static/js/main.026c8c72.js"
+  ]
+}
