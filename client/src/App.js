@@ -23,6 +23,7 @@ import AnalyticsView from './views/AnalyticsView';
 
 function App() {
   return (
+    //Adding comment for change
     <div className="App">
       {/* <Box
         sx={{
