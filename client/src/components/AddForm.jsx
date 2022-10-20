@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+/* MATERIAL UI IMPORTS */
 import Card from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -9,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
+import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -21,6 +23,11 @@ import AddTimerForm from '../components/AddTimerForm';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 //axios
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -48,6 +55,8 @@ function AddForm() {
     // CHANGE THIS FATIGUE
     const [fatigue, setFatigue] = useState(null);
     const [hover, setHover] = React.useState(-1);
+    const [date, setDate] = React.useState(dayjs('2014-08-18T21:11:54'));
+
     const history = useHistory();
 
     const onChangeHandler = (e) => {
@@ -56,6 +65,10 @@ function AddForm() {
             [e.target.name]: e.target.value,
         })
     }
+
+    const handleDate = (newValue) => {
+        setDate(newValue);
+    };
 
     /*
     (event, newValue) => {
@@ -76,7 +89,7 @@ function AddForm() {
         4.5: 'Excellent',
         5: 'Excellent+',
     };
-
+    /* functions */
     function getLabelText(value) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
     }
@@ -132,7 +145,7 @@ function AddForm() {
                 <Box
                     sx={{ display: 'flex' }}
                 >
-                  
+
                     <FitnessCenterIcon />
                     <CardHeader
                         title="Add A New Workout"
@@ -143,60 +156,78 @@ function AddForm() {
                 <form onSubmit={onSubmitHandler}>
                     <div>
                         {/* FIELD: EXERCISE */}
-                        <InputLabel>Exercise</InputLabel>
-                        <Select
-                            required
-                            placeholder="Exercise"
-                            labelId="demo-simple-select-autowidth-label"
-                            id="demo-simple-select-autowidth"
-                            // value={age}
-                            // onChange={handleChange}
-                            label="Exercise"
-                            name="exercise"
-                            onChange={onChangeHandler}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={"twoHandedSwing"}>Two Handed Swing</MenuItem>
-                            <MenuItem value={"oneHandedSwing"}>One Handed Swing</MenuItem>
-                            <MenuItem value={"rackedFrontSquat"}>Racked Front Squat</MenuItem>
-                            <MenuItem value={"gobletSquat"}>Goblet Squat</MenuItem>
-                            <MenuItem value={"shoulderPress"}>Shoulder Press</MenuItem>
-                            <MenuItem value={"sumoDeadLift"}>Sumo Deadlift</MenuItem>
-                            <MenuItem value={"row"}>Row</MenuItem>
-                        </Select>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <FormControl sx={{ mt: 1, minWidth: 225 }}>
+                                <DesktopDatePicker
+                                    required
+                                    label="Date"
+                                    inputFormat="MM/DD/YYYY"
+                                    value={value}
+                                    onChange={handleDate}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </FormControl>
+                        </LocalizationProvider>
+                    </div>
+                    <div>
+                        <FormControl sx={{ mt: 1, minWidth: 230 }}>
+                            <InputLabel id="demo-simple-select-label">Exercise</InputLabel>
+                            <Select
+                                required
+                                label="Exercise"
+                                name="Exercise"
+                                id="demo-simple-select-autowidth"
+                                placeholder="Exercises"
+                                autoWidth
+                                // value={age}
+                                // onChange={handleChange}
+                                onChange={onChangeHandler}
+                            >
+                                <MenuItem value={"twoHandedSwing"}>Two Handed Swing</MenuItem>
+                                <MenuItem value={"oneHandedSwing"}>One Handed Swing</MenuItem>
+                                <MenuItem value={"rackedFrontSquat"}>Racked Front Squat</MenuItem>
+                                <MenuItem value={"gobletSquat"}>Goblet Squat</MenuItem>
+                                <MenuItem value={"shoulderPress"}>Shoulder Press</MenuItem>
+                                <MenuItem value={"situps"}>Sit Ups</MenuItem>
+                                <MenuItem value={"sumoDeadLift"}>Sumo Deadlift</MenuItem>
+                                <MenuItem value={"row"}>Row</MenuItem>
+                            </Select>
+                        </FormControl>
                         {/* <label>Set</label>
                         <input type="text" /> */}
                     </div>
                     <div>
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Reps"
-                            name="reps"
-                            onChange={onChangeHandler}
-                            sx={{ margin: 0.5 }}
-                        />
+                        <FormControl sx={{ mt: 1, minWidth: 230 }}>
+                            <TextField
+                                required
+                                id="outlined-required"
+                                label="Reps"
+                                name="reps"
+                                onChange={onChangeHandler}
+                            // sx={{ margin: 0.5 }}
+                            />
+                        </FormControl>
                     </div>
-                    <div class="mb-3 form-check">
+                    <div class="mb-2 form-check">
                         <FormGroup>
                             <FormControlLabel sx={{ margin: 0.25 }} control={<Checkbox />} name="startStop" onChange={onChangeHandler} label="Start & Stopped?" />
                             <FormControlLabel sx={{ margin: 0.25 }} control={<Checkbox />} name="ease" onChange={onChangeHandler} label="Easy?" />
                         </FormGroup>
                     </div>
                     <div>
-                        <TextField
-                            id="outlined-textarea"
-                            label="Notes"
-                            name="notes"
-                            onChange={onChangeHandler}
-                            placeholder="Post Workout Thoughts."
-                            multiline
-                            sx={{ margin: 0.5 }}
-                        />
+                        <FormControl sx={{ minWidth: 230 }}>
+                            <TextField
+                                id="outlined-textarea"
+                                label="Notes"
+                                name="notes"
+                                onChange={onChangeHandler}
+                                placeholder="Post Workout Thoughts."
+                                multiline
+                                sx={{ margin: 0.5 }}
+                            />
+                        </FormControl>
                     </div>
-                    <div sx={{ padding: 2 }}>
+                    <div sx={{ padding: 1 }}>
                         <label>Energy Level:</label>
                         <Rating
                             required
@@ -227,8 +258,9 @@ function AddForm() {
                     <Grid
                         container
                         justifyContent="space-between"
-                        mt={2}>
-                        <Button sx={2} type="submit" variant="contained">Submit</Button>
+                        mt={1}
+                        >
+                        <Button sx={3} type="submit" variant="contained">Submit</Button>
                         {/* ADD TIMER */}
                         {/* <AddTimerForm /> */}
                     </Grid>
@@ -238,7 +270,7 @@ function AddForm() {
                     onClick={onTestAlert}
                 >
                     Test Alert</button> */}
-                    {/* {
+                {/* {
                         submitted == true ? <div class="mt-2"><Alert severity="success">Workout Added Successfully!</Alert></div> : null
                     } */}
             </Card>
