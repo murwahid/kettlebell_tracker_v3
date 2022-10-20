@@ -1,4 +1,5 @@
 import * as React from 'react';
+/* MATERIAL UI IMPORTS */
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -18,6 +19,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import Avatar from '@mui/material/Avatar';
+import Grid from '@mui/material/Grid';
+
 
 const drawerWidth = 240;
 
@@ -83,18 +87,23 @@ export default function PersistentDrawerLeft() {
             <CssBaseline />
             <AppBar position="fixed" open={open}>
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        Kettlebell Tracker
-                    </Typography>
+                    <Grid container>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap component="div">
+                            Kettlebell Tracker
+                        </Typography>
+                    </Grid>
+                    <Grid justify="flex-end">
+                        <Avatar>MW</Avatar>
+                    </Grid>
                 </Toolbar>
             </AppBar>
             <Drawer

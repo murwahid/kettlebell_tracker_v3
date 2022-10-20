@@ -15,6 +15,7 @@ import Grid from '@mui/material/Grid';
 import TestCardView from './views/TestCardView';
 import TestDrawer from './components/TestDrawer';
 import AnalyticsView from './views/AnalyticsView';
+import LoginView from './views/LoginView';
 
 
 
@@ -32,12 +33,13 @@ function App() {
       >
           <DashboardView />
       </Box> */}
-      <div class="mb-5">
+      {/* <div class="mb-5">
         <TestDrawer />
-      </div>
+      </div> */}
       {/* <NavBar/> */}
       <div>
-        <DashboardView />
+        <LoginView/>
+        {/* <DashboardView /> */}
         {/* <AnalyticsView/> */}
       </div>
 

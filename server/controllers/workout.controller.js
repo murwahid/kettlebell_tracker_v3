@@ -5,7 +5,7 @@ const { Workout } = require('../models/workout.models');
 // const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const accountSid = "AC8b8c58f8f0d76d6644b01c213371b2dc"; 
-const authToken = "61f3ae5f4271df749e068293edcce6c9";
+const authToken = "61f3ae5f4271df749e068293edcce6c9";   
 
 //TWILIO
 const client = require('twilio')(accountSid, authToken);
